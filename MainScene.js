@@ -53,7 +53,7 @@ dirLight.castShadow = true;
 scene.add(dirLight);
 scene.add(dirLight.target);
 
-const ambientLight = new THREE.AmbientLight(0x404040, 1);
+const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
 scene.add(ambientLight);
 
 // const spotLight = new THREE.SpotLight(0xffffff, 50);
@@ -66,11 +66,11 @@ scene.add(ambientLight);
 // scene.add(spotLight);
 
 createPot(scene, new THREE.Vector3(5, -0.6, -1), new THREE.Vector3(0.1, 0.1, 0.1));
-let well = await createObjectScene(scene, "Gltfs/well.glb", new THREE.Vector3(3, -0.1, 0), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
+//let well = await createObjectScene(scene, "Gltfs/well.glb", new THREE.Vector3(3, -0.1, 0), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
 let monster = await createObjectScene(scene, "Gltfs/FlyingMonster.glb", new THREE.Vector3(0.5, 3.5, -5.5), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, -Math.PI / 2, 0));
-let humanoid = await createObjectScene(scene, "Gltfs/Humanoid.glb", new THREE.Vector3(0.5, 1.05, 0.4), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
-let weapon = await createObjectScene(scene, "Gltfs/Weapon.glb", new THREE.Vector3(0.25, 1.2, 0.8), new THREE.Vector3(0.85, 0.7, 0.85), new THREE.Vector3(Math.PI, -Math.PI / 2, 0));
-let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(0.2, -0.5, 2.3), new THREE.Vector3(1.75, 1.75, 1.75), new THREE.Vector3(0, 0, 0));
+//let humanoid = await createObjectScene(scene, "Gltfs/Humanoid.glb", new THREE.Vector3(0.5, 1.05, 0.4), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
+//let weapon = await createObjectScene(scene, "Gltfs/Weapon.glb", new THREE.Vector3(0.25, 1.2, 0.8), new THREE.Vector3(0.85, 0.7, 0.85), new THREE.Vector3(Math.PI, -Math.PI / 2, 0));
+//let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(0.2, -0.5, 2.3), new THREE.Vector3(1.75, 1.75, 1.75), new THREE.Vector3(0, 0, 0));
 createChalice(scene, new THREE.Vector3(2.45, 0.9, -0.5), new THREE.Vector3(0.2, 0.2, 0.2));
 createCandle(scene, new THREE.Vector3(2.35, 0.95, 0.6), new THREE.Vector3(0.12, 0.12, 0.12));
 

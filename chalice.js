@@ -90,9 +90,11 @@ export function createChalice(scene, position, scale) {
   geom.setIndex(new THREE.BufferAttribute(indices, 1));
   geom.computeVertexNormals();
 
+  const texLoader = new THREE.TextureLoader();
+
   const mesh = new THREE.Mesh(
     geom,
-    new THREE.MeshStandardMaterial({ 
+    new THREE.MeshStandardMaterial({
       color: 0xe09000, // yellow
       side: THREE.DoubleSide,
       metalness: 0.4,

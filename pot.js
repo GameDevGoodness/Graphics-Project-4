@@ -10,8 +10,8 @@ export function createPot(scene, position, scale) {
     const potMat = new THREE.MeshStandardMaterial({
       side: THREE.DoubleSide,
       metalness: 0.5,
-      map: texLoader.load("Textures/Pot Textures/pot_diffuse_map.jpg"),
-      roughnessMap: texLoader.load("Textures/Pot Textures/pot_rough_map.jpg")
+      map: texLoader.load("Textures/pot_diffuse_map.jpg"),
+      roughnessMap: texLoader.load("Textures/pot_rough_map.jpg")
     });
     potMat.map.colorSpace = THREE.SRGBColorSpace;
 

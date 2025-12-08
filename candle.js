@@ -62,13 +62,21 @@ export function createCandle(scene, position, scale) {
   baseStickHolder.position.y = -0.12;
   candleGroup.add(baseStickHolder);
 
+  const texLoader = new THREE.TextureLoader();
+
   // the wax candle stick, positioned to rest above the bowl
   const stickGeometry = new THREE.CylinderGeometry(0.2, 0.2 , 2, 24);
   const stickMat = new THREE.MeshStandardMaterial({
     color : 0xF3E3C2,
     metalness: 0.4,
-    roughness: 0.8
+    roughness: 0.8,
+    map: texLoader.load("Textures/wax.jpg")
   });
+  stickMat.map.colorSpace = THREE.SRGBColorSpace;
+  stickMat.map.wrapS = THREE.MirroredRepeatWrapping;
+  stickMat.map.wrapT = THREE.MirroredRepeatWrapping;
+  stickMat.map.repeat.set(1, 2);
+
   const stick = new THREE.Mesh(stickGeometry, stickMat);
   stick.receiveShadow = true;
   stick.castShadow = true;
