@@ -5,16 +5,20 @@ import * as THREE from "three";
 
 export function createPot(scene, position, scale) {
 
+    const texLoader = new THREE.TextureLoader();
+
+    const potMat = new THREE.MeshStandardMaterial({
+      side: THREE.DoubleSide,
+      metalness: 0.5,
+      map: texLoader.load("Textures/Pot Textures/pot_diffuse_map.jpg"),
+      roughnessMap: texLoader.load("Textures/Pot Textures/pot_rough_map.jpg")
+    });
+    potMat.map.colorSpace = THREE.SRGBColorSpace;
+
     const matLightBrown = new THREE.MeshStandardMaterial({
       color: 0x523c0f,
       metalness: 0.05,
       roughness: 0.9,
-    });
-    const potMat = new THREE.MeshStandardMaterial({
-      side: THREE.DoubleSide,
-      color: 0x005919,
-      metalness: 0.5,
-      roughness: 0.6,
     });
     const doubleMatDarkBrown = new THREE.MeshStandardMaterial({
       side: THREE.DoubleSide,
