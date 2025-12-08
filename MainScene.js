@@ -7,7 +7,6 @@
 
 
 import * as THREE from "three";
-//import { FlyControls } from 'three/addons/controls/FlyControls.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { createPot } from "./pot.js";
 import { createChalice } from "./chalice.js";
@@ -16,7 +15,7 @@ import { createCandle } from "./candle.js";
 import { createObjectScene } from "./gltfImporter.js";
 
 // ---------------------------------------------------------
-// 1) Basic scene setup
+// Basic scene setup
 // ---------------------------------------------------------
 const scene = new THREE.Scene();
 
@@ -56,21 +55,12 @@ scene.add(dirLight.target);
 const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
 scene.add(ambientLight);
 
-// const spotLight = new THREE.SpotLight(0xffffff, 50);
-// spotLight.position.set(-2, 8, -1);
-// spotLight.target.position.set(-2, 0, -0.5);
-// spotLight.penumbra = 0.5;
-// spotLight.distance = 30;
-// spotLight.angle = Math.PI / 10;
-// spotLight.castShadow = true;
-// scene.add(spotLight);
-
 createPot(scene, new THREE.Vector3(5, -0.6, -1), new THREE.Vector3(0.1, 0.1, 0.1));
-//let well = await createObjectScene(scene, "Gltfs/well.glb", new THREE.Vector3(3, -0.1, 0), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
+let well = await createObjectScene(scene, "Gltfs/well.glb", new THREE.Vector3(3, -0.1, 0), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
 let monster = await createObjectScene(scene, "Gltfs/FlyingMonster.glb", new THREE.Vector3(0.5, 3.5, -5.5), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, -Math.PI / 2, 0));
-//let humanoid = await createObjectScene(scene, "Gltfs/Humanoid.glb", new THREE.Vector3(0.5, 1.05, 0.4), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
-//let weapon = await createObjectScene(scene, "Gltfs/Weapon.glb", new THREE.Vector3(0.25, 1.2, 0.8), new THREE.Vector3(0.85, 0.7, 0.85), new THREE.Vector3(Math.PI, -Math.PI / 2, 0));
-//let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(0.2, -0.5, 2.3), new THREE.Vector3(1.75, 1.75, 1.75), new THREE.Vector3(0, 0, 0));
+let humanoid = await createObjectScene(scene, "Gltfs/Humanoid.glb", new THREE.Vector3(0.5, 1.05, 0.4), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, 0, 0));
+let weapon = await createObjectScene(scene, "Gltfs/Weapon.glb", new THREE.Vector3(0.25, 1.2, 0.8), new THREE.Vector3(0.85, 0.7, 0.85), new THREE.Vector3(Math.PI, -Math.PI / 2, 0));
+let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(0.2, -0.5, 2.3), new THREE.Vector3(1.75, 1.75, 1.75), new THREE.Vector3(0, 0, 0));
 createChalice(scene, new THREE.Vector3(2.45, 0.9, -0.5), new THREE.Vector3(0.2, 0.2, 0.2));
 createCandle(scene, new THREE.Vector3(2.35, 0.95, 0.6), new THREE.Vector3(0.12, 0.12, 0.12));
 
@@ -127,9 +117,25 @@ topConceilMesh.rotation.set(Math.PI / 2, 0, 0);
 topConceilMesh.position.set(0, 200, 0);
 scene.add(topConceilMesh);
 
+// ---------------------------------------------------------
+// Audio setup
+// ---------------------------------------------------------
+
+// create an AudioListener and add it to the camera
+const audioListener = new THREE.AudioListener();
+camera.add(audioListener);
+// create a global audio source
+const bugSound = new THREE.Audio( audioListener );
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load("Bug Flapping.wav", function( buffer ) {
+	bugSound.setBuffer(buffer);
+	bugSound.setLoop(true);
+	bugSound.setVolume(0.5);
+});
 
 // ---------------------------------------------------------
-// 7) Render loop & resize handling
+// Render loop & resize handling
 // ---------------------------------------------------------
 function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -157,7 +163,25 @@ window.addEventListener('keydown', function (event) {
       }
     });
 
+    if (isAnimationPlaying)
+      bugSound.stop();
+    else
+      bugSound.play();
+
     isAnimationPlaying = !isAnimationPlaying;
+  }
+  else if (event.key == 'B' || event.key == 'b') {
+    const clips = monster.animations;
+    clips.forEach( function ( clip ) {
+      mixer.clipAction( clip ).stop();
+    });
+
+    bugSound.stop();
+    isAnimationPlaying = false;
+    camera.position.set(0.5, 0.8, 8);
+    controls.target.set(0, 1.5, -1);
+    controls.update();
+
   }
 
 });
