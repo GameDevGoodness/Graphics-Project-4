@@ -125,14 +125,17 @@ scene.add(topConceilMesh);
 const audioListener = new THREE.AudioListener();
 camera.add(audioListener);
 // create a global audio source
-const bugSound = new THREE.Audio( audioListener );
+const bugSound = new THREE.PositionalAudio( audioListener );
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new THREE.AudioLoader();
 audioLoader.load("Bug Flapping.wav", function( buffer ) {
 	bugSound.setBuffer(buffer);
 	bugSound.setLoop(true);
-	bugSound.setVolume(0.5);
+	bugSound.setVolume(5);
+  bugSound.setRefDistance(5);
+  monster.scene.add(bugSound);
 });
+
 
 // ---------------------------------------------------------
 // Render loop & resize handling
