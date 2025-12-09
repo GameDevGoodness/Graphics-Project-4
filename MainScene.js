@@ -44,9 +44,9 @@ controls.update();
 
 // set up environment
 
-scene.fog = new THREE.FogExp2(0x222222, 0.02);
+scene.fog = new THREE.FogExp2(0x222222, 0.03);
 
-const dirLight = new THREE.DirectionalLight(0xd0d0FF, 3);
+const dirLight = new THREE.DirectionalLight(0xd0d0FF, 1);
 //const dirLight = new THREE.DirectionalLight(0xFFFFFF, 5);
 dirLight.position.set(0, 10, 0);
 dirLight.target.position.set(-5, 0, 0);
@@ -54,7 +54,7 @@ dirLight.castShadow = true;
 scene.add(dirLight);
 scene.add(dirLight.target);
 
-const ambientLight = new THREE.AmbientLight(0x404040, 2);
+const ambientLight = new THREE.AmbientLight(0x404040, 1.25);
 scene.add(ambientLight);
 
 createPot(scene, new THREE.Vector3(5, -0.6, -1), new THREE.Vector3(0.1, 0.1, 0.1));
@@ -66,6 +66,7 @@ let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(
 let ground = await createObjectScene(scene, "Gltfs/Ground.glb", new THREE.Vector3(30, -1, -57), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
 let grass = await createGrassScene(scene, "Gltfs/Grass.glb", new THREE.Vector3(30, -2, -57), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
 let trees = await createObjectScene(scene, "Gltfs/Trees.glb", new THREE.Vector3(30, -1, -57), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
+let rock = await createObjectScene(scene, "Gltfs/Rock.glb", new THREE.Vector3(-1, 1.6, -35.3), new THREE.Vector3(0.6, 0.6, 0.6), new THREE.Vector3(0, Math.PI / 2, 0));
 
 createChalice(scene, new THREE.Vector3(2.45, 0.9, -0.5), new THREE.Vector3(0.2, 0.2, 0.2));
 createCandle(scene, new THREE.Vector3(2.35, 0.95, 0.6), new THREE.Vector3(0.12, 0.12, 0.12));
@@ -201,7 +202,7 @@ window.addEventListener('keydown', function (event) {
     ambientSound.stop();
     ambientSound.play();
     isAnimationPlaying = false;
-    camera.position.set(0.5, 0.8, 8);
+    camera.position.set(0.5, 0.8, 9);
     controls.target.set(0, 1.5, -1);
     controls.update();
 
