@@ -66,6 +66,7 @@ let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(
 let ground = await createObjectScene(scene, "Gltfs/Ground.glb", new THREE.Vector3(34, -10, -30), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
 let grass = await createGrassScene(scene, "Gltfs/Grass.glb", new THREE.Vector3(34, -10.4, -30), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
 let trees = await createObjectScene(scene, "Gltfs/Trees.glb", new THREE.Vector3(34, -10, -30), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
+
 createChalice(scene, new THREE.Vector3(2.45, 0.9, -0.5), new THREE.Vector3(0.2, 0.2, 0.2));
 createCandle(scene, new THREE.Vector3(2.35, 0.95, 0.6), new THREE.Vector3(0.12, 0.12, 0.12));
 
