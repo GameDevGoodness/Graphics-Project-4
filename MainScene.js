@@ -124,10 +124,15 @@ scene.add(topConceilMesh);
 // create an AudioListener and add it to the camera
 const audioListener = new THREE.AudioListener();
 camera.add(audioListener);
+
 // create a global audio source
-const bugSound = new THREE.PositionalAudio( audioListener );
-// load a sound and set it as the Audio object's buffer
+const bugSound = new THREE.PositionalAudio(audioListener);
+const ambientSound = new THREE.Audio(audioListener);
+
+// sound loader
 const audioLoader = new THREE.AudioLoader();
+
+// load bug flapping sound
 audioLoader.load("Bug Flapping.wav", function( buffer ) {
 	bugSound.setBuffer(buffer);
 	bugSound.setLoop(true);
@@ -136,6 +141,13 @@ audioLoader.load("Bug Flapping.wav", function( buffer ) {
   monster.scene.add(bugSound);
 });
 
+// load nightime ambience
+audioLoader.load("Night Ambience.mp3", function( buffer ) {
+	ambientSound.setBuffer(buffer);
+	ambientSound.setLoop(true);
+	ambientSound.setVolume(1);
+  ambientSound.play();
+});
 
 // ---------------------------------------------------------
 // Render loop & resize handling
@@ -180,6 +192,8 @@ window.addEventListener('keydown', function (event) {
     });
 
     bugSound.stop();
+    ambientSound.stop();
+    ambientSound.play();
     isAnimationPlaying = false;
     camera.position.set(0.5, 0.8, 8);
     controls.target.set(0, 1.5, -1);
