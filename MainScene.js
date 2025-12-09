@@ -13,6 +13,7 @@ import { createChalice } from "./chalice.js";
 import { createGrave } from "./grave.js";
 import { createCandle } from "./candle.js";
 import { createObjectScene } from "./gltfImporter.js";
+import { createGrassScene } from "./gltfGrassImporter.js";
 
 // ---------------------------------------------------------
 // Basic scene setup
@@ -63,6 +64,8 @@ let humanoid = await createObjectScene(scene, "Gltfs/Humanoid.glb", new THREE.Ve
 let weapon = await createObjectScene(scene, "Gltfs/Weapon.glb", new THREE.Vector3(0.25, 1.2, 0.8), new THREE.Vector3(0.85, 0.7, 0.85), new THREE.Vector3(Math.PI, -Math.PI / 2, 0));
 let stool = await createObjectScene(scene, "Gltfs/stool.glb", new THREE.Vector3(0.2, -0.5, 2.3), new THREE.Vector3(1.75, 1.75, 1.75), new THREE.Vector3(0, 0, 0));
 let ground = await createObjectScene(scene, "Gltfs/Ground.glb", new THREE.Vector3(34, -10, -30), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
+let grass = await createGrassScene(scene, "Gltfs/Grass.glb", new THREE.Vector3(34, -10.4, -30), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
+let trees = await createObjectScene(scene, "Gltfs/Trees.glb", new THREE.Vector3(34, -10, -30), new THREE.Vector3(1, 1, 1), new THREE.Vector3(0, Math.PI / 2, 0));
 createChalice(scene, new THREE.Vector3(2.45, 0.9, -0.5), new THREE.Vector3(0.2, 0.2, 0.2));
 createCandle(scene, new THREE.Vector3(2.35, 0.95, 0.6), new THREE.Vector3(0.12, 0.12, 0.12));
 
