@@ -23,11 +23,11 @@ export async function createGrassScene(scene, path, position, scale, rotation) {
   gltf.scene.traverse(function (child) {
     if (child.isMesh) {
       child.castShadow = false;
-      child.receiveShadow = true;
+      child.receiveShadow = false;
 
-      child.material.side = THREE.DoubleSide;
+      //child.material.side = THREE.DoubleSide;
       
-      child.material.transparent = true;
+      child.material.transparent = false;
       child.material.alphaTest = 0.9;
       
       child.material.needsUpdate = true;
